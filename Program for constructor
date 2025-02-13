@@ -32,3 +32,4 @@ public class Fruit{
         System.out.println("Cost of that fruit :"+ f2.showPrice());
     }
 }
+----------------------------------------------------------------------
