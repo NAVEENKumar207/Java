@@ -96,3 +96,39 @@ public class BankSystem{
 }
 }
 -----------------------------------------------------------------------------------------------------------
+class Book {
+    private String isbn;
+    private String title;
+    private String author;
+    private int copies;
+    private static int totalBooks=0;
+    
+    public Book() {
+        isbn = null;
+        title = null;
+        author = null;
+        copies = 0;
+    }
+    public Book(String num, String titles, String auth, int copy) {
+        isbn = num;
+        title = titles;
+        author = auth;
+        copies = copy;
+        totalBooks++;
+    }
+    public void displayBook(){
+        System.out.println("ISBN: " + isbn);
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Copies: " + copies);
+        System.out.println("----------------------------------");
+    }
+    public static int getTotalBooks() {
+        return totalBooks;
+    }
+    class Member{
+        private int mid;
+        private String name;
+    }
+
+}
