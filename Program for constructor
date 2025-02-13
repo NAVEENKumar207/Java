@@ -1,0 +1,34 @@
+public class Fruit{
+    private double fCost;
+    private String fname;
+    Fruit(){
+        fCost = 0.0d;
+        fname = null;
+    }
+    Fruit(double fPrice,String Name)
+    {
+        fCost = fPrice;
+        fname = Name;
+    }
+    Fruit(Fruit fruit)
+    {
+        System.out.println("\nAfter invoking the constructor");
+        fCost = fruit.fCost;
+        fname = fruit.fname;
+    }
+    double showPrice(){
+        return fCost;
+    }
+    String showName(){
+        return fname;
+    }
+    public static void main(String args[])
+    {
+        Fruit f1 = new Fruit(5.0, "Apple");
+        System.out.println("Name of the fruit :"+ f1.showName());
+        System.out.println("Cost of that fruit :"+ f1.showPrice());
+        Fruit f2 = new Fruit(f1);
+        System.out.println("Name of the fruit :"+ f2.showName());
+        System.out.println("Cost of that fruit :"+ f2.showPrice());
+    }
+}
