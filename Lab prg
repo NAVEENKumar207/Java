@@ -112,3 +112,61 @@ public class BankSystem {
     }
 }
 -----------------------------------------------------------------------------------------------------
+abstract class Vehicle {
+    String vehicleName;
+    String brand;
+    double dailyRate;
+
+    Vehicle(String vehicleName, String brand, double dailyRate) {
+        this.vehicleName = vehicleName;
+        this.brand = brand;
+        this.dailyRate = dailyRate;
+    }
+
+    abstract double calculateRent(int days);
+
+    void displayRent(int days) {
+        System.out.println("Vehicle Name: " + vehicleName);
+        System.out.println("Daily Rate: " + dailyRate);
+        System.out.println("Days: " + days);
+        System.out.println("Total Rent: " + calculateRent(days));
+    }
+}
+
+class Car extends Vehicle {
+    Car(String vehicleName, String brand, double dailyRate) {
+        super(vehicleName, brand, dailyRate);
+    }
+
+    @Override
+    double calculateRent(int days) {
+        return dailyRate * days;
+    }
+}
+
+class Bike extends Vehicle {
+    Bike(String vehicleName, String brand, double dailyRate) {
+        super(vehicleName, brand, dailyRate);
+    }
+
+    @Override
+    double calculateRent(int days) {
+        double total = dailyRate * days;
+        double discount = total * 0.1;
+        return total - discount;
+    }
+}
+
+public class VehicleRentalSystem {
+    public static void main(String[] args) {
+        Vehicle car = new Car("Super Car", "BMW", 10000);
+        Vehicle bike = new Bike("Super Bike", "NINJA H2R", 5000000);
+
+        System.out.println("CAR Rental");
+        car.displayRent(55);
+
+        System.out.println("\nBIKE Rental");
+        bike.displayRent(55);
+    }
+}
+-----------------------------------------------------------------------------------
