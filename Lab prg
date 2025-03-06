@@ -170,3 +170,108 @@ public class VehicleRentalSystem {
     }
 }
 -----------------------------------------------------------------------------------
+abstract class Product {
+    String productId;
+    String name;
+    double price;
+
+    public Product(String productId, String name, double price) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+    }
+
+    abstract double calculateDiscountedPrice();
+
+    public void displayProductDetails() {
+        System.out.println("--------------------------------------");
+        System.out.println("Product ID: " + productId);
+        System.out.println("Name: " + name);
+        System.out.println("Original Price: $" + price);
+        System.out.println("Discounted Price: $" + calculateDiscountedPrice());
+    }
+}
+
+class Electronics extends Product {
+    public Electronics(String productId, String name, double price) {
+        super(productId, name, price);
+    }
+
+    @Override
+    double calculateDiscountedPrice() {
+        return price - (price * 0.10);
+    }
+}
+
+class Clothing extends Product {
+    public Clothing(String productId, String name, double price) {
+        super(productId, name, price);
+    }
+
+    @Override
+    double calculateDiscountedPrice() {
+        return price - (price * 0.15);
+    }
+}
+
+public class OnlineShoppingSystem {
+    public static void main(String[] args) {
+        Product laptop = new Electronics("ELE55", "PC", 100000);
+        Product tshirt = new Clothing("CLO66", "Denim Shirt", 1000);
+        laptop.displayProductDetails();
+        tshirt.displayProductDetails();
+    }
+}
+---------------------------------------------------------------------------------------
+abstract class Exam {
+    String examId;
+    String subject;
+    double totalMarks;
+
+    public Exam(String examId, String subject, double totalMarks) {
+        this.examId = examId;
+        this.subject = subject;
+        this.totalMarks = totalMarks;
+    }
+    abstract boolean evaluateResult();
+    public void displayResult() {
+        System.out.println("Exam ID: " + examId);
+        System.out.println("Subject: " + subject);
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Result: " + (evaluateResult() ? "Pass" : "Fail"));
+        System.out.println("-----------------------------");
+    }
+}
+
+class TheoryExam extends Exam {
+    public TheoryExam(String examId, String subject, double totalMarks) {
+        super(examId, subject, totalMarks);
+    }
+    
+    @Override
+    boolean evaluateResult() {
+        return totalMarks >= 40;
+    }
+}
+
+class PracticalExam extends Exam {
+    public PracticalExam(String examId, String subject, double totalMarks) {
+        super(examId, subject, totalMarks);
+    }
+    @Override
+    boolean evaluateResult() {
+        return totalMarks >= 50;
+    }
+}
+public class UniversityExamSystem {
+    public static void main(String[] args) {
+        Exam theoryExam1 = new TheoryExam("T101", "Mathematics", 45);
+        Exam theoryExam2 = new TheoryExam("T102", "Physics", 35);
+        Exam practicalExam1 = new PracticalExam("P201", "Computer Science Lab", 55);
+        Exam practicalExam2 = new PracticalExam("P202", "Chemistry Lab", 45);
+        theoryExam1.displayResult();
+        theoryExam2.displayResult();
+        practicalExam1.displayResult();
+        practicalExam2.displayResult();
+    }
+}
