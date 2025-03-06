@@ -1,0 +1,49 @@
+abstract class Employee{
+    String name;         
+    int empId;
+    double basicSalary;
+    Employee(String name,int empId,double basicSalary)
+    {
+        this.name = name;
+        this.empId = empId;
+        this.basicSalary = basicSalary;
+    }
+    abstract double calculateSalary();
+    void displaySalary(){
+        System.out.println("Employee Name : "+name);
+        System.out.println("Employee ID: "+empId);
+        System.out.println("Salary : "+calculateSalary());
+    }
+}
+class FulltimeEmployee extends Employee{
+    public FulltimeEmployee(String name,int empId,double basicSalary){
+    super(name,empId,basicSalary);
+}
+@Override
+public double calculateSalary(){
+    return basicSalary+(0.2 * basicSalary);
+}
+}
+class PartTimeEmployee extends Employee{
+    double hourlyrate;
+    int hoursWorked;
+    public PartTimeEmployee(String name,int empId,double basicSalary,double hourlyrate,int hoursWorked){
+        super (name,empId,basicSalary);
+        this.hourlyrate = hourlyrate;
+        this.hoursWorked = hoursWorked;
+    }
+    @Override
+    double calculateSalary(){
+        return basicSalary+(hourlyrate*hoursWorked);
+    }
+} 
+public class EmployeeTest{
+    public static void main(String[] args){
+        Employee fulltime = new FulltimeEmployee("Naveen",101,20000);
+        Employee parttime = new PartTimeEmployee("Mohan",99,2000,50,20);
+        fulltime.displaySalary();
+        System.out.println();
+        parttime.displaySalary();
+    }
+}
+------------------------------------------------------------------------------------------------------------------
