@@ -1,0 +1,116 @@
+package prg2;
+
+public class InventoryStock {
+    public static void main(String[] args) {
+        int[] stock = {10,0,5,9,4};
+        int minStock = stock[0];
+        int minIndex = 0, countOutofStotck = 0;
+        boolean outOfStock = false;
+        for(int i=0; i<stock.length ; i++){
+            if(i < minStock){
+                minStock = stock[i];
+                minIndex = i;
+            }
+            if(stock[i] == 0){
+                outOfStock = true;
+                countOutofStotck++;
+            }
+        }
+        System.out.println("Product with lowest Stock " + (minIndex+1) + "(stock :" + minStock + ")");
+        System.out.println("Is any Product Out of stock ? " + (outOfStock?"yes":"no"));
+        System.out.println("Number of Product Out of stocks are : " + countOutofStotck);
+    }
+}
+---------------------------------------------------------------------------------------------------
+package prg2;
+public class StudentGrades {
+    public static void main(String[] args) {
+        int[] marks = {85,92,78,90,88};
+        int total = 0,max = marks[0],min = marks[0],countAboveAvg = 0;
+        for(int mark : marks){
+            total += mark;
+            if(mark > max) 
+                max = mark;
+            if (mark < min) 
+                min = mark;
+        }
+        double average = (double) total / marks.length;
+        for(int mark : marks){
+            if(mark > average)
+                countAboveAvg++;
+        }
+        System.out.println("Average marks: " + average);
+        System.out.println("Highest marks: " + max);
+        System.out.println("Lowest marks: " + min);
+        System.out.println("Student Scoring above average: " + countAboveAvg);
+    }
+}
+-------------------------------------------------------------------------------------------------
+package prg2;
+
+public class TemperatureMonitor {
+    public static void main(String[] args) {
+        double[] temperature = {30.5,15.6,25.1,33.0,17.6};
+        double total = 0,maxTemp = temperature[0],minTemp = temperature[0];
+        int hotDays = 0;
+        for(double temp : temperature){
+            total += temp;
+            if(temp>maxTemp)
+                maxTemp = temp;
+            if(temp<minTemp)
+                minTemp = temp;
+        } 
+        double averageTemperature = total / temperature.length;
+        for(double temp : temperature){
+            if(temp> averageTemperature)
+                hotDays++;
+        }
+        System.out.println("Average Temperature: " + averageTemperature);
+        System.out.println("Hottest Temperature: " + maxTemp);
+        System.out.println("Coldest Temperature: " + minTemp);
+        System.out.println("Number Of Days at highest Temperature is " + hotDays);
+    }
+}
+---------------------------------------------------------------------------------------------
+package prg2;
+import java.util.Scanner;
+public class UserNameValidator {
+    public static boolean isvalid(String username){
+        return username.matches("[a-zA-Z0-9]{6,}");
+    }
+    public static void main(String[] args){
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Enter the Username :");
+            String username = sc.nextLine();
+            if(isvalid(username)){
+                System.out.println("Valid Username");
+            }else{
+                System.out.println("Invalid Username");
+            }
+        }
+    }
+}
+---------------------------------------------------------------------------------------------
+package Exercise2;
+import java.util.Arrays;
+import java.util.Scanner;
+public class AnagramChecker {
+    public static boolean areAnagram(String str1,String str2) {
+        str1 = str1.replaceAll("\\s"," ").toLowerCase();
+        str2 = str2.replaceAll("\\s"," ").toLowerCase();
+        if(str1.length() != str2.length())
+            rethun false;
+        char[] arr1 = str1.toCharArray();
+        char[] arr2 = str2.toCharArray();
+
+
+
+
+
+
+
+
+
+
+    }
+}
