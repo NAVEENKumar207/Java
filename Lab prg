@@ -66,68 +66,100 @@ public class EmployeesTest {
 }
 
 ------------------------------------------------------------------------------------------------------------------
+import java.util.Scanner;
+
 abstract class bankAccount {
     String accountNumber;
-    String holderName;
+    String holder;
     double balance;
-    public bankAccount(String accountNumber, String holderName, double balance) {
+
+    bankAccount(String accountNumber, String holder, double balance) {
         this.accountNumber = accountNumber;
-        this.holderName = holderName;
+        this.holder = holder;
         this.balance = balance;
     }
-    abstract double calculateInterest();
-    void deposit(double amount) {
+
+    abstract double calculateIntrest();
+
+    public void deposit(double amount) {
         balance += amount;
-        System.out.println("Deposited: " + amount + " New balance: " + balance);
+        System.out.println("Deposited Amount to Your Account, new balance: " + balance);
     }
-        void withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
+
+    public void withdraw(double amount) {
+        if (amount <= balance) {
             balance -= amount;
-            System.out.println("Withdrawn: " + amount + " New balance: " + balance);
+            System.out.println("Withdrawn Amount from Your Account, new balance: " + balance);
         } else {
-            System.out.println("Insufficient balance");
+            System.out.println("Insufficient Balance");
         }
     }
-    public void displayAccountDetails() {
-        System.out.println("---------------------------------");
+
+    public void displayInfo() {
         System.out.println("Account Number: " + accountNumber);
-        System.out.println("Holder Name: " + holderName);
-        System.out.println("Balance: $" + balance);
-        System.out.println("Interest Earned: $" + calculateInterest());
+        System.out.println("Holder: " + holder);
+        System.out.println("Balance: " + balance);
     }
 }
+
 class savingsAccount extends bankAccount {
-    savingsAccount(String accountNumber, String holderName, double balance) {
-        super(accountNumber, holderName, balance);
+    public savingsAccount(String accountNumber, String holder, double balance) {
+        super(accountNumber, holder, balance);
     }
 
     @Override
-    double calculateInterest() {
-        return balance * 0.04; 
-    }
-}
-class currentAccount extends bankAccount {
-    currentAccount(String accountNumber, String holderName, double balance) {
-        super(accountNumber, holderName, balance);
-    }
-    @Override
-    double calculateInterest() {
+    double calculateIntrest() {
         return balance * 0.02;
     }
 }
 
-public class BankSystem {
+class currentAccount extends bankAccount {
+    public currentAccount(String accountNumber, String holder, double balance) {
+        super(accountNumber, holder, balance);
+    }
+
+    @Override
+    double calculateIntrest() {
+        return balance * 0.02;
+    }
+}
+
+public class BankingSystem {
     public static void main(String[] args) {
-        bankAccount savings = new savingsAccount("Nav007", "Naveen", 20000);
-        bankAccount current = new currentAccount("Moh08", "Mohan", 10000);
-        System.out.println("Savings Account Interest: $" + savings.calculateInterest());
-        savings.withdraw(20006);
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Enter the Savings Account number, Holder name, and their balance:");
+        String accountNumber = sc.nextLine();  
+        String holder = sc.nextLine();     
+        double balance = sc.nextDouble();    
+        sc.nextLine();
+        
+        savingsAccount s = new savingsAccount(accountNumber, holder, balance);
+        s.displayInfo();
+        System.out.println("Savings Account Interest: " + s.calculateIntrest());
+        System.out.println("Enter the Withdraw Amount for Savings Account:");
+        double withdrawAmount = sc.nextDouble();
+        s.withdraw(withdrawAmount);
         System.out.println();
-        System.out.println("Current Account Interest: $" + current.calculateInterest());
-        current.deposit(5000);
-        current.withdraw(2000);
-        savings.displayAccountDetails();
-        current.displayAccountDetails();
+        sc.nextLine();  
+        System.out.println("Enter the Current Account number, Holder name, and their balance:");
+        accountNumber = sc.nextLine();  
+        holder = sc.nextLine();
+        balance = sc.nextDouble();
+        sc.nextLine();  
+        
+        currentAccount c = new currentAccount(accountNumber, holder, balance);
+        c.displayInfo();
+        System.out.println("Current Account Interest: " + c.calculateIntrest());
+        System.out.println("Enter the Deposit Amount for Current Account:");
+        double depositAmount = sc.nextDouble();
+        c.deposit(depositAmount);
+        System.out.println("Enter the Withdraw Amount for Current Account:");
+        double withdrawAmountC = sc.nextDouble();
+        c.withdraw(withdrawAmountC);
+        System.out.println();
+
+        sc.close();
     }
 }
 -----------------------------------------------------------------------------------------------------
