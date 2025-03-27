@@ -163,6 +163,8 @@ public class BankingSystem {
     }
 }
 -----------------------------------------------------------------------------------------------------
+import java.util.Scanner;
+
 abstract class Vehicle {
     String vehicleName;
     String brand;
@@ -174,13 +176,12 @@ abstract class Vehicle {
         this.dailyRate = dailyRate;
     }
 
-    abstract double calculateRent(int days);
+    abstract double calculateRentalCost(int days);
 
-    void displayRent(int days) {
+    public void displayVehicleInfo() {
         System.out.println("Vehicle Name: " + vehicleName);
-        System.out.println("Daily Rate: " + dailyRate);
-        System.out.println("Days: " + days);
-        System.out.println("Total Rent: " + calculateRent(days));
+        System.out.println("Brand: " + brand);
+        System.out.println("Daily Rate: $" + dailyRate);
     }
 }
 
@@ -190,8 +191,8 @@ class Car extends Vehicle {
     }
 
     @Override
-    double calculateRent(int days) {
-        return dailyRate * days;
+    double calculateRentalCost(int days) {
+        return (dailyRate + 500) * days;
     }
 }
 
@@ -201,23 +202,71 @@ class Bike extends Vehicle {
     }
 
     @Override
-    double calculateRent(int days) {
-        double total = dailyRate * days;
-        double discount = total * 0.1;
-        return total - discount;
+    double calculateRentalCost(int days) {
+        return dailyRate * days;
     }
 }
 
-public class VehicleRentalSystem {
+class Truck extends Vehicle {
+    Truck(String vehicleName, String brand, double dailyRate) {
+        super(vehicleName, brand, dailyRate);
+    }
+
+    @Override
+    double calculateRentalCost(int days) {
+        return (dailyRate + 1000) * days;
+    }
+}
+
+public class VehicleSystem {
     public static void main(String[] args) {
-        Vehicle car = new Car("Super Car", "BMW", 10000);
-        Vehicle bike = new Bike("Super Bike", "NINJA H2R", 5000000);
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Enter the type of the vehicle (bike/car/truck): ");
+        String vehicleType = sc.nextLine();
 
-        System.out.println("CAR Rental");
-        car.displayRent(55);
-
-        System.out.println("\nBIKE Rental");
-        bike.displayRent(55);
+        switch (vehicleType) {
+            case "bike":
+                System.out.println("Enter bike's name, brand, and daily rate: ");
+                String bikeName = sc.nextLine();
+                String bikeBrand = sc.nextLine();
+                double bikeDailyRate = sc.nextDouble();
+                sc.nextLine();  
+                Bike b = new Bike(bikeName, bikeBrand, bikeDailyRate);
+                b.displayVehicleInfo();
+                System.out.println("Enter number of days for rent: ");
+                int bikeDays = sc.nextInt();
+                System.out.println("Total rental cost for bike: $" + b.calculateRentalCost(bikeDays));
+                break;
+            case "car":
+                System.out.println("Enter car's name, brand, and daily rate: ");
+                String carName = sc.nextLine();
+                String carBrand = sc.nextLine();
+                double carDailyRate = sc.nextDouble();
+                sc.nextLine();  
+                Car c = new Car(carName, carBrand, carDailyRate);
+                c.displayVehicleInfo();
+                System.out.println("Enter number of days for rent: ");
+                int carDays = sc.nextInt();
+                System.out.println("Total rental cost for car: $" + c.calculateRentalCost(carDays));
+                break;
+            case "truck":
+                System.out.println("Enter truck's name, brand, and daily rate: ");
+                String truckName = sc.nextLine();
+                String truckBrand = sc.nextLine();
+                double truckDailyRate = sc.nextDouble();
+                sc.nextLine();  
+                Truck t = new Truck(truckName, truckBrand, truckDailyRate);
+                t.displayVehicleInfo();
+                System.out.println("Enter number of days for rent: ");
+                int truckDays = sc.nextInt();
+                System.out.println("Total rental cost for truck: $" + t.calculateRentalCost(truckDays));
+                break;
+            default:
+                System.out.println("Invalid vehicle type.");
+                break;
+        }
+        sc.close();
     }
 }
 -----------------------------------------------------------------------------------
