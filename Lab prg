@@ -270,6 +270,7 @@ public class VehicleSystem {
     }
 }
 -----------------------------------------------------------------------------------
+import java.util.*;
 abstract class Product {
     String productId;
     String name;
@@ -284,7 +285,6 @@ abstract class Product {
     abstract double calculateDiscountedPrice();
 
     public void displayProductDetails() {
-        System.out.println("--------------------------------------");
         System.out.println("Product ID: " + productId);
         System.out.println("Name: " + name);
         System.out.println("Original Price: $" + price);
@@ -316,9 +316,19 @@ class Clothing extends Product {
 
 public class OnlineShoppingSystem {
     public static void main(String[] args) {
-        Product laptop = new Electronics("ELE55", "PC", 100000);
-        Product tshirt = new Clothing("CLO66", "Denim Shirt", 1000);
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Enter Electroinc Product ID, Name, Price");
+        String productId = sc.nextLine();
+        String name = sc.next();
+        double price = sc.nextDouble();
+        Electronics laptop = new Electronics(productId, name, price);
         laptop.displayProductDetails();
+        System.out.println("Enter Clothing Product ID, Name, Price");
+        productId = sc.next();
+        name = sc.next();
+        price = sc.nextDouble();
+        Clothing tshirt = new Clothing(productId, name, price);
         tshirt.displayProductDetails();
     }
 }
