@@ -1,8 +1,15 @@
-package prg2;
+import java.util.Scanner;
 
 public class InventoryStock {
     public static void main(String[] args) {
-        int[] stock = {10,0,5,9,4};
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of stock : ");
+        int n = sc.nextInt();
+        int stock[] = new int[n];
+        System.out.println("Enter stock for each product : ");
+        for(int i=0; i<n; i++){
+            stock[i] = sc.nextInt();
+        }
         int minStock = stock[0];
         int minIndex = 0, countOutofStotck = 0;
         boolean outOfStock = false;
@@ -19,13 +26,23 @@ public class InventoryStock {
         System.out.println("Product with lowest Stock " + (minIndex+1) + "(stock :" + minStock + ")");
         System.out.println("Is any Product Out of stock ? " + (outOfStock?"yes":"no"));
         System.out.println("Number of Product Out of stocks are : " + countOutofStotck);
+        sc.close();
     }
 }
 ---------------------------------------------------------------------------------------------------
-package prg2;
+import java.util.Scanner;
+
 public class StudentGrades {
     public static void main(String[] args) {
-        int[] marks = {85,92,78,90,88};
+        Scanner sc  = new Scanner(System.in);
+        System.out.println(" ");
+        System.out.println("Enter the number of students: ");
+        int n = sc.nextInt();
+        System.out.println("Enter the marks of each student:");
+        int[] marks = new int[n];
+        for(int i = 0; i < n; i++){
+            marks[i] = sc.nextInt();
+        }
         int total = 0,max = marks[0],min = marks[0],countAboveAvg = 0;
         for(int mark : marks){
             total += mark;
@@ -43,14 +60,22 @@ public class StudentGrades {
         System.out.println("Highest marks: " + max);
         System.out.println("Lowest marks: " + min);
         System.out.println("Student Scoring above average: " + countAboveAvg);
+        sc.close();
     }
 }
 -------------------------------------------------------------------------------------------------
-package prg2;
+import java.util.Scanner;
 
 public class TemperatureMonitor {
     public static void main(String[] args) {
-        double[] temperature = {30.5,15.6,25.1,33.0,17.6};
+        Scanner sc  = new Scanner(System.in);
+        System.out.println("Enter the number of days: ");
+        int days = sc.nextInt();
+        System.out.println("Enter the temperatures for each day: ");
+        double[] temperature = new double[days];
+        for(int i = 0; i < days; i++){
+            temperature[i] = sc.nextDouble();
+        }
         double total = 0,maxTemp = temperature[0],minTemp = temperature[0];
         int hotDays = 0;
         for(double temp : temperature){
@@ -69,7 +94,9 @@ public class TemperatureMonitor {
         System.out.println("Hottest Temperature: " + maxTemp);
         System.out.println("Coldest Temperature: " + minTemp);
         System.out.println("Number Of Days at highest Temperature is " + hotDays);
+        sc.close();
     }
+
 }
 ---------------------------------------------------------------------------------------------
 package prg2;
@@ -91,26 +118,32 @@ public class UserNameValidator {
     }
 }
 ---------------------------------------------------------------------------------------------
-package Exercise2;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 public class AnagramChecker {
     public static boolean areAnagram(String str1,String str2) {
-        str1 = str1.replaceAll("\\s"," ").toLowerCase();
-        str2 = str2.replaceAll("\\s"," ").toLowerCase();
+        str1 = str1.replaceAll("\\s","").toLowerCase();
+        str2 = str2.replaceAll("\\s","").toLowerCase();
         if(str1.length() != str2.length())
-            rethun false;
+            return false;
         char[] arr1 = str1.toCharArray();
         char[] arr2 = str2.toCharArray();
-
-
-
-
-
-
-
-
-
-
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        return Arrays.equals(arr1,arr2);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" ");
+        System.out.println("Enter the First String : ");
+        String str1 = sc.next();
+        System.out.println("Enter the Second String : ");
+        String str2 = sc.next();
+        if(areAnagram(str1, str2)){
+            System.out.println("The Strings are Anagram ");
+        }else{
+            System.out.println("The Strings are Not Anagram ");
+        }
+        sc.close();
     }
 }
+---------------------------------------------------------------------------------------------
