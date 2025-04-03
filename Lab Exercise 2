@@ -170,3 +170,95 @@ public class VowelConsonants {
     }
 }
 ---------------------------------------------------------------------------------------------
+import java.util.*;
+public class longWord {
+    public static String findLongestWord(String sentence) {
+        String[] words = sentence.split("\\s+");
+        String longestWord = "";
+        for (String word: words) {
+            word = word.replaceAll("[^a-zA-Z]", "");
+            if (word.length() > longestWord.length()) {
+                longestWord = word;
+            }
+        }
+        return longestWord;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" ");
+        System.out.println("Enter a sentence:");
+        String sentence = sc.nextLine();
+        System.out.println("Longest word: " + findLongestWord(sentence));
+        sc.close();
+    }
+}
+---------------------------------------------------------------------------------------------
+import java.util.*;
+public class palindrome {
+    public static boolean ispalindrame(String str) {
+        str = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        int left = 0, right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left)!= str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("");
+        System.out.println("Enter a string: ");
+        String str = sc.nextLine();
+        if(ispalindrame(str)){
+            System.out.println(str + " is a palindrome.");
+        }else{
+            System.out.println(str + " is not a palindrome.");
+        }
+        sc.close();
+    }
+}
+---------------------------------------------------------------------------------------------
+import java.util.*;
+public class reverse {
+    public static String reverseString(String str) {
+        String[] words = str.split(" ");
+        StringBuffer result = new StringBuffer();
+        for(String word:words){
+            StringBuffer sb = new StringBuffer(word);
+            result.append(sb.reverse()).append(" ");
+        }
+        return result.toString().trim();
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a string:");
+        String str = sc.nextLine();
+        System.out.println("Original String: " + str);
+        System.out.println("Reversed String: " + reverseString(str));
+        sc.close();
+    }
+}
+---------------------------------------------------------------------------------------------
+import java.util.*;
+public class reverse {
+    public static String reverseString(String str) {
+        String[] words = str.split(" ");
+        StringBuffer result = new StringBuffer();
+        for(String word:words){
+            StringBuffer sb = new StringBuffer(word);
+            result.append(sb.reverse()).append(" ");
+        }
+        return result.toString().trim();
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a string:");
+        String str = sc.nextLine();
+        System.out.println("Original String: " + str);
+        System.out.println("Reversed String: " + reverseString(str));
+        sc.close();
+    }
+}
