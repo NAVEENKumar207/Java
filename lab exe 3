@@ -1,0 +1,39 @@
+interface Billable {
+    double generateBill(double amount);
+}
+interface Discountable extends Billable {
+    double applyDiscount(double amount);
+}
+class RegularCustomer implements Billable {
+    public double generateBill(double amount) {
+        return amount; 
+    }
+}
+class PremiumCustomer implements Discountable {
+    public double applyDiscount(double amount) {
+        return amount * 0.8; 
+    }
+    public double generateBill(double amount) {
+        return applyDiscount(amount);
+    }
+}
+class EmployeeCustomer implements Discountable {
+    public double applyDiscount(double amount) {
+        return amount * 0.3; 
+    }
+    public double generateBill(double amount) {
+        return applyDiscount(amount);
+    }
+}
+public class BillingSystem {
+    public static void main(String[] args) {
+        double amount = 2000;
+        Billable regular = new RegularCustomer();
+        Discountable premium = new PremiumCustomer();
+        Discountable employee = new EmployeeCustomer();
+
+        System.out.println("Regular Customer Bill: $" + regular.generateBill(amount));
+        System.out.println("Premium Customer Bill: $" + premium.generateBill(amount));
+        System.out.println("Employee Customer Bill: $" + employee.generateBill(amount));
+    }
+}
