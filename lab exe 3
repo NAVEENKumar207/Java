@@ -37,3 +37,22 @@ public class BillingSystem {
         System.out.println("Employee Customer Bill: $" + employee.generateBill(amount));
     }
 }
+_________________________________________________________________________________________________
+package Library.books;
+
+public class Book {
+    private String title;
+    private String author;
+    private boolean avialable = true;
+    public Book(String title,String author){
+        this.title = title;
+        this.author = author;
+    }
+    public boolean isAvailable(){
+        return avialable;
+    }
+    pubic void borrow(){
+        avialable = false;
+    }
+    
+}
