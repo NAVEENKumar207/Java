@@ -109,3 +109,12 @@ public class Main {
     }
 }
 ________________________________________________________________________________________
+Compilation:
+javac -d . Book.java
+javac -d . Student.java
+javac -d . Staff.java
+javac -d . Transaction.java
+javac -d . Main.java
+
+Execution:
+java app.Main
