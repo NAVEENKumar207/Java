@@ -1,0 +1,111 @@
+package library.books;
+public class Book {
+    private String title;
+    private String author;
+    private boolean available = true;
+    public Book(String title, String author) {
+    this.title = title;
+    this.author = author;
+ }
+ public boolean isAvailable() {
+    return available;
+ }
+ public void borrow() {
+    available = false;
+ }
+ public void returnBook() {
+    available = true;
+ }
+ public void displayDetails() {
+    System.out.println("Title: " + title + ", Author: " + author + ", Available: " + available);
+ }
+}
+_______________________________________________________________________________________________
+package library.users;
+public class Student {
+    private String name;
+    private int rollNumber;
+    public Student(String name, int rollNumber) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+    }
+    public void displayInfo() {
+        System.out.println("Student Name: " + name + ", Roll No: " + rollNumber);
+        System.out.println(" ");
+    }
+}
+______________________________________________________________________________________________
+package library.users;
+public class Staff {
+    private String name;
+    private int idNumber;
+    public Staff(String name, int idNumber) {
+        this.name = name;
+        this.idNumber = idNumber;
+    }
+    public void displayInfo() {
+        System.out.println("Staff Name: " + name + ", ID No: " + idNumber);
+        System.out.println(" ");
+    }
+}
+________________________________________________________________________________________
+package library.transactions;
+import library.books.Book;
+import library.users.Staff;
+import library.users.Student;
+public class Transaction {
+   public void issueBook(Book book, Student student) {
+        if (book.isAvailable()) {
+            book.borrow();
+            System.out.println("Book issued to:");
+            student.displayInfo();
+        } else {
+            System.out.println("Book is currently not available.");
+        }
+    }
+    public void issueBookStaff(Book book, Staff staff) {
+        if (book.isAvailable()) {
+            book.borrow();
+            System.out.println("Book issued to:");
+            staff.displayInfo();
+        } else {
+            System.out.println("Book is currently not available.");
+    }
+    }
+    public void returnBook(Book book) {
+        book.returnBook();
+        System.out.println("Book has been returned.");
+    }
+}
+________________________________________________________________________________________
+package app;
+
+import library.books.Book;
+import library.transactions.Transaction;
+import library.users.Staff;
+import library.users.Student;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Book book1 = new Book("Marvel Comics", "Stan Lee");
+        Book book2 = new Book("Java Book", "Deepak");
+        Student student1 = new Student("NK", 007);
+        Staff staff1 = new Staff("SEDHU", 98);
+
+        Transaction transaction = new Transaction();
+
+        book1.displayDetails();
+        transaction.issueBook(book1, student1);
+        book1.displayDetails();
+        transaction.returnBook(book1);
+        book1.displayDetails();
+
+        book2.displayDetails();
+        transaction.issueBookStaff(book2, staff1);
+        book2.displayDetails();
+        transaction.returnBook(book2);
+        book2.displayDetails();
+    }
+}
+________________________________________________________________________________________
