@@ -1,0 +1,42 @@
+import java.io.*;
+public class ProductInfo {
+    public static void main(String[] args) {
+        String inputFile = "sales.txt";
+        String outputFile = "sales_report.txt";
+        double grandTotal = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            
+            writer.write("Product Sales Report\n");
+            writer.write(String.format("%s %s %.2s %.2s%n","Product", "Quantity", "Price", "Sales"));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String productName = parts[0].trim();
+                    int quantity = Integer.parseInt(parts[1].trim());
+                    double price = Double.parseDouble(parts[2].trim());
+                    double sales = price * quantity;
+                    grandTotal += sales;
+                    
+                    writer.write(String.format("%s %d $%.2f $%.2f%n",productName, quantity, price, sales));
+
+                System.out.printf("Product: %s, Quantity: %d, Price: $%.2f, Sales: $%.2f%n",productName, quantity, price, sales);
+                } else {
+                    System.out.println("Invalid line format: " + line);
+                }
+            }
+            writer.write(String.format("%s %s $%f%n", "Grand Total:", "", grandTotal));
+            
+            System.out.println("\nTotal Sales Report");
+            System.out.printf("Grand Total: $%.2f%n", grandTotal);
+            System.out.println("Report written to " + outputFile);
+        } catch (IOException e) {
+            System.out.println("File error: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format in input file.");
+        }
+    }
+}
